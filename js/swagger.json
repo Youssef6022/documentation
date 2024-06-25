@@ -1,0 +1,1165 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "API de teste",
+        "description": "API de teste",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://youss.cuik.io",
+            "description": ""
+        }
+    ],
+    "tags": [
+        {
+            "name": "User"
+        },
+        {
+            "name": "Auth"
+        }
+    ],
+    "paths": {
+        "/api/user/info": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Permet de récupérer les informations d'un utilisateur",
+                "operationId": "getUserInfo",
+                "responses": {
+                    "200": {
+                        "description": "Renverra les informations de l'utilisateur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "info": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "username": {
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "password": {
+                                                    "type": "string"
+                                                },
+                                                "account_type": {
+                                                    "type": "string"
+                                                },
+                                                "anthropic_key": {
+                                                    "type": "string"
+                                                },
+                                                "created_at": {
+                                                    "type": "string"
+                                                },
+                                                "cancel_at": {
+                                                    "type": "string"
+                                                },
+                                                "canceled_at": {
+                                                    "type": "string"
+                                                },
+                                                "paying": {
+                                                    "type": "boolean"
+                                                },
+                                                "payment_date": {
+                                                    "type": "string"
+                                                },
+                                                "payment_plan": {
+                                                    "type": "string"
+                                                },
+                                                "payment_renewal": {
+                                                    "type": "string"
+                                                },
+                                                "refresh": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "crawls": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "user_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "request": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Paramètres incorrects",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Invalid data!",
+                                        "status": "error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Non autorisé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "User not found!",
+                                        "status": "error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "refresh",
+                        "schema": {
+                            "type": "string",
+                            "default": "e6dbbc9273124853c1214f2d3e222aa729f11dd11c6bf37a9880754bd746ae8d"
+                        },
+                        "description": "Refresh token de l'utilisateur",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "/api/user/add_key": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Permet d'ajouter une clé anthropic à un utilisateur",
+                "operationId": "addKey",
+                "responses": {
+                    "200": {
+                        "description": "Clé ajoutée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "info": {
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "info": {},
+                                        "message": "Key added!",
+                                        "status": "success"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "refresh": {
+                                        "type": "string"
+                                    },
+                                    "anthropic": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "refresh": "e6dbbc9273124853c1214f2d3e222aa729f11dd11c6bf37a9880754bd746ae8d",
+                                    "anthropic": "sk-ant-api03-DXV...."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/create_crawl": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Permet de créer un nouveau dossier",
+                "operationId": "createCrawl",
+                "responses": {
+                    "200": {
+                        "description": "Crawl créé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "info": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "user_id": {
+                                                    "type": "integer"
+                                                },
+                                                "request": {
+                                                    "type": "string"
+                                                },
+                                                "status": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "info": {
+                                            "id": 1,
+                                            "user_id": 1,
+                                            "request": "Mon premier crawl",
+                                            "status": null
+                                        },
+                                        "message": "Crawl created!",
+                                        "status": "success"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "refresh": {
+                                        "type": "string"
+                                    },
+                                    "request": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "refresh": "e6dbbc9273124853c1214f2d3e222aa729f11dd11c6bf37a9880754bd746ae8d",
+                                    "request": "Mon premier crawl"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/scrap_google": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Permet de scrapper via Google",
+                "operationId": "scrapGoogle",
+                "responses": {
+                    "200": {
+                        "description": "Scrap lancé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "info": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "user_id": {
+                                                    "type": "integer"
+                                                },
+                                                "request": {
+                                                    "type": "string"
+                                                },
+                                                "status": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "info": {
+                                            "id": 1,
+                                            "user_id": 1,
+                                            "request": "Mon premier crawl",
+                                            "status": null
+                                        },
+                                        "message": "Google Scrapping done!",
+                                        "status": "success"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "refresh": {
+                                        "type": "string"
+                                    },
+                                    "crawl_id": {
+                                        "type": "integer"
+                                    },
+                                    "query": {
+                                        "type": "string"
+                                    },
+                                    "numbers": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "example": {
+                                    "refresh": "e6dbbc9273124853c1214f2d3e222aa729f11dd11c6bf37a9880754bd746ae8d",
+                                    "crawl_id": 16,
+                                    "query": "banane",
+                                    "numbers": 5
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/scrap_urls": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Permet de scrapper des urls",
+                "operationId": "scrapUrls",
+                "responses": {
+                    "200": {
+                        "description": "Scrap lancé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "info": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "user_id": {
+                                                    "type": "integer"
+                                                },
+                                                "request": {
+                                                    "type": "string"
+                                                },
+                                                "status": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "info": {
+                                            "id": 1,
+                                            "user_id": 1,
+                                            "request": "Mon premier crawl",
+                                            "status": null
+                                        },
+                                        "message": "Urls Scrapping done!",
+                                        "status": "success"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "refresh": {
+                                        "type": "string"
+                                    },
+                                    "crawl_id": {
+                                        "type": "integer"
+                                    },
+                                    "urls": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "refresh": "e6dbbc9273124853c1214f2d3e222aa729f11dd11c6bf37a9880754bd746ae8d",
+                                    "crawl_id": 16,
+                                    "urls": [
+                                        "https://www.rivedroite-paris.com/collections/sacs-bananes",
+                                        "https://www.materne.be/pages/banana"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/add_manually_url": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Permet d'ajouter manuellement une url",
+                "operationId": "addManuallyUrl",
+                "responses": {
+                    "200": {
+                        "description": "Url ajoutée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "info": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "user_id": {
+                                                    "type": "integer"
+                                                },
+                                                "request": {
+                                                    "type": "string"
+                                                },
+                                                "status": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "info": {
+                                            "id": 1,
+                                            "user_id": 1,
+                                            "request": "Mon premier crawl",
+                                            "status": null
+                                        },
+                                        "message": "Url added!",
+                                        "status": "success"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "refresh": {
+                                        "type": "string"
+                                    },
+                                    "crawl_id": {
+                                        "type": "integer"
+                                    },
+                                    "source": {
+                                        "type": "string"
+                                    },
+                                    "content": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "refresh": "e6dbbc9273124853c1214f2d3e222aa729f11dd11c6bf37a9880754bd746ae8d",
+                                    "crawl_id": 16,
+                                    "source": "https://www.rivedroite-paris.com/collections/sacs-bananes",
+                                    "content": "Les bananes ont un effet apaisant sur l'intestin grâce à leur teneur élevée en pectine..."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/crawl_data": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Permet de récupérer les données d'un crawl",
+                "operationId": "crawlData",
+                "responses": {
+                    "200": {
+                        "description": "Données récupérées",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "info": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "user_id": {
+                                                    "type": "integer"
+                                                },
+                                                "request": {
+                                                    "type": "string"
+                                                },
+                                                "status": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "Request": {
+                                                    "type": "string"
+                                                },
+                                                "Scrap": {
+                                                    "type": "string"
+                                                },
+                                                "Estimation": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "Workflow": {
+                                                            "type": "integer"
+                                                        },
+                                                        "Light": {
+                                                            "type": "integer"
+                                                        }
+                                                    }
+                                                },
+                                                "Article": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "Seo": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "Instructions": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "seo": {
+                                                                            "type": "array"
+                                                                        },
+                                                                        "language": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "description": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "keywords": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "Content": {
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "Outline": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "Instructions": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "outline": {
+                                                                            "type": "array"
+                                                                        },
+                                                                        "language": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "description": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "keywords": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "Content": {
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "Writer": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "Instructions": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "writer": {
+                                                                            "type": "array"
+                                                                        },
+                                                                        "language": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "description": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "keywords": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "Content": {
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "Faq": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "Instructions": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "language": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "description": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "keywords": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "Content": {
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "Light": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "Instructions": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "seo": {
+                                                                            "type": "array"
+                                                                        },
+                                                                        "outline": {
+                                                                            "type": "array"
+                                                                        },
+                                                                        "topics": {
+                                                                            "type": "array"
+                                                                        },
+                                                                        "required": {
+                                                                            "type": "array"
+                                                                        },
+                                                                        "language": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "description": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "keywords": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "Content": {
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        },
+                                                        "Workflow": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "Instructions": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "seo": {
+                                                                            "type": "array"
+                                                                        },
+                                                                        "outline": {
+                                                                            "type": "array"
+                                                                        },
+                                                                        "writer": {
+                                                                            "type": "array"
+                                                                        },
+                                                                        "language": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "description": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "keywords": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "Content": {
+                                                                    "type": "object"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "status": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "refresh",
+                        "schema": {
+                            "type": "string",
+                            "default": "e6dbbc9273124853c1214f2d3e222aa729f11dd11c6bf37a9880754bd746ae8d"
+                        },
+                        "description": "Refresh token de l'utilisateur",
+                        "in": "query"
+                    },
+                    {
+                        "name": "crawl_id",
+                        "schema": {
+                            "type": "integer",
+                            "default": 16
+                        },
+                        "description": "Id du crawl",
+                        "in": "query"
+                    }
+                ]
+            }
+        },
+        "/api/user/generate_article": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Permet de générer un article",
+                "operationId": "generateArticle",
+                "responses": {
+                    "200": {
+                        "description": "Article généré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "info": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "user_id": {
+                                                    "type": "integer"
+                                                },
+                                                "request": {
+                                                    "type": "string"
+                                                },
+                                                "status": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "info": {
+                                            "id": 1,
+                                            "user_id": 1,
+                                            "request": "Mon premier crawl",
+                                            "status": ""
+                                        },
+                                        "message": "Article generated!",
+                                        "status": "success"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "refresh": {
+                                        "type": "string"
+                                    },
+                                    "crawl_id": {
+                                        "type": "integer"
+                                    },
+                                    "seo": {
+                                        "type": "array"
+                                    },
+                                    "outline": {
+                                        "type": "array"
+                                    },
+                                    "writer": {
+                                        "type": "array"
+                                    },
+                                    "topics": {
+                                        "type": "array"
+                                    },
+                                    "required": {
+                                        "type": "array"
+                                    },
+                                    "language": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "refresh": "e6dbbc9273124853c1214f2d3e222aa729f11dd11c6bf37a9880754bd746ae8d",
+                                    "crawl_id": 16,
+                                    "agent": "Light",
+                                    "language": "french"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/signup": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Permet de s'inscrire",
+                "operationId": "signup",
+                "responses": {
+                    "200": {
+                        "description": "Inscription réussie",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "info": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "username": {
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "password": {
+                                                    "type": "string"
+                                                },
+                                                "account_type": {
+                                                    "type": "string"
+                                                },
+                                                "anthropic_key": {
+                                                    "type": "string"
+                                                },
+                                                "created_at": {
+                                                    "type": "string"
+                                                },
+                                                "cancel_at": {
+                                                    "type": "string"
+                                                },
+                                                "canceled_at": {
+                                                    "type": "string"
+                                                },
+                                                "paying": {
+                                                    "type": "boolean"
+                                                },
+                                                "payment_date": {
+                                                    "type": "string"
+                                                },
+                                                "payment_plan": {
+                                                    "type": "string"
+                                                },
+                                                "payment_renewal": {
+                                                    "type": "string"
+                                                },
+                                                "refresh": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Paramètres incorrects",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "message": "Invalid data!",
+                                        "status": "error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "username": "test",
+                                    "email": "test@gmail.com",
+                                    "password": "test"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Permet de se connecter",
+                "operationId": "login",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "email": "test@gmail.com",
+                                    "password": "test"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Connexion réussie",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "info": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "username": {
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "password": {
+                                                    "type": "string"
+                                                },
+                                                "account_type": {
+                                                    "type": "string"
+                                                },
+                                                "anthropic_key": {
+                                                    "type": "string"
+                                                },
+                                                "created_at": {
+                                                    "type": "string"
+                                                },
+                                                "cancel_at": {
+                                                    "type": "string"
+                                                },
+                                                "canceled_at": {
+                                                    "type": "string"
+                                                },
+                                                "paying": {
+                                                    "type": "boolean"
+                                                },
+                                                "payment_date": {
+                                                    "type": "string"
+                                                },
+                                                "payment_plan": {
+                                                    "type": "string"
+                                                },
+                                                "payment_renewal": {
+                                                    "type": "string"
+                                                },
+                                                "refresh": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "crawls": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "user_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "request": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
