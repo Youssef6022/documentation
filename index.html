@@ -16,6 +16,27 @@
 
 <body>
     <div id="swagger-ui"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.addedNodes.length) {
+                        const topbarElement = document.querySelector('.topbar');
+                        if (topbarElement) {
+                            topbarElement.remove();
+                            observer.disconnect(); // Arrêtez d'observer une fois l'élément trouvé et supprimé
+                        }
+                    }
+                });
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        });
+    </script>
 </body>
 
 </html>
