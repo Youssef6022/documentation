@@ -1244,6 +1244,63 @@
                     }
                 }
             }
+        },
+        "/api/user/download_file": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Permet de télécharger un fichier",
+                "operationId": "downloadFile",
+                "responses": {
+                    "200": {
+                        "description": "Fichier téléchargé",
+                        "content": {
+                            "file": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "refresh",
+                        "schema": {
+                            "type": "string",
+                            "default": "e6dbbc9273124853c1214f2d3e222aa729f11dd11c6bf37a9880754bd746ae8d"
+                        },
+                        "description": "Refresh token de l'utilisateur",
+                        "in": "query"
+                    },
+                    {
+                        "name": "crawl_id",
+                        "schema": {
+                            "type": "integer",
+                            "default": 16
+                        },
+                        "description": "Id du crawl",
+                        "in": "query"
+                    },
+                    {
+                        "name": "article",
+                        "schema": {
+                            "type": "string",
+                            "default": "Light"
+                        },
+                        "description": "Article",
+                        "in": "query"
+                    },
+                    {
+                        "name": "content_type",
+                        "schema": {
+                            "type": "string",
+                            "default": "text/plain"
+                        },
+                        "description": "Type de contenu (text/plain, text/html)",
+                        "in": "query"
+                    }
+                ]
+            }
         }
     }
 }
