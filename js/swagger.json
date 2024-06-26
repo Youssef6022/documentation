@@ -1160,6 +1160,90 @@
                     }
                 }
             }
+        },
+        "/api/user/update_scrap": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Permet de mettre à jour les données de scrap",
+                "operationId": "updateScrap",
+                "responses": {
+                    "200": {
+                        "description": "Scrap mis à jour",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "info": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "user_id": {
+                                                    "type": "integer"
+                                                },
+                                                "request": {
+                                                    "type": "string"
+                                                },
+                                                "status": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "info": {
+                                            "id": 16,
+                                            "user_id": 1,
+                                            "request": "Mon premier crawl",
+                                            "status": null
+                                        },
+                                        "message": "Scrap data updated!",
+                                        "status": "success"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "refresh": {
+                                        "type": "string"
+                                    },
+                                    "crawl_id": {
+                                        "type": "integer"
+                                    },
+                                    "scrap_data": {
+                                        "type": "object"
+                                    }
+                                },
+                                "example": {
+                                    "refresh": "e6dbbc9273124853c1214f2d3e222aa729f11dd11c6bf37a9880754bd746ae8d",
+                                    "crawl_id": 16,
+                                    "scrap_data": {
+                                        "https://en.wikipedia.org/wiki/Banana": "Tropical/subtropical edible staple,...",
+                                        "https://www.materne.be/pages/banana": "Un petit peu d'histoire..."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
