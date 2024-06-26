@@ -833,7 +833,7 @@
                 "operationId": "generateArticle",
                 "responses": {
                     "200": {
-                        "description": "Article généré",
+                        "description": "Génération de l'article",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -870,7 +870,7 @@
                                             "request": "Mon premier crawl",
                                             "status": ""
                                         },
-                                        "message": "Article generated!",
+                                        "message": "generating...",
                                         "status": "success"
                                     }
                                 }
