@@ -894,6 +894,91 @@
                                     "crawl_id": {
                                         "type": "integer"
                                     },
+                                    "agent": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "refresh": "e6dbbc9273124853c1214f2d3e222aa729f11dd11c6bf37a9880754bd746ae8d",
+                                    "crawl_id": 16,
+                                    "agent": "Light"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/add_instructions": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Permet d'ajouter des instructions",
+                "operationId": "addInstructions",
+                "responses": {
+                    "200": {
+                        "description": "Ajout des instructions",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "info": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "user_id": {
+                                                    "type": "integer"
+                                                },
+                                                "request": {
+                                                    "type": "string"
+                                                },
+                                                "status": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "crawl": {
+                                            "id": 9,
+                                            "mode": null,
+                                            "request": "Mon premier crawl",
+                                            "status": "done",
+                                            "user_id": 6
+                                        },
+                                        "message": "Instructions added!",
+                                        "status": "success"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "refresh": {
+                                        "type": "string"
+                                    },
+                                    "crawl_id": {
+                                        "type": "integer"
+                                    },
+                                    "agent": {
+                                        "type": "string"
+                                    },
                                     "seo": {
                                         "type": "array"
                                     },
